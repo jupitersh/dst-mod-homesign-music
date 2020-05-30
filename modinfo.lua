@@ -2,7 +2,7 @@ name = "Homesign Music"
 description = "Homesign plays music"
 
 author = "辣椒小皇纸"
-version = "1.0.0"
+version = "1.1.0"
 forumthread = ""
 api_version = 10
 

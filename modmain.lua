@@ -75,6 +75,7 @@ local function JustPlay(inst, musicsheet)
         inst.AnimState:PlayAnimation("hit")
         local character = music[index]
         if character == nil or character[1] == nil or character[2] == nil then
+            inst.components.machine:TurnOff()
             return
         end
         local octave = character[2]
@@ -99,22 +100,7 @@ local function TurnOn(inst)
     end
     --获取木牌文字
     local text_homesign = inst.components.writeable.text
-    --提取木牌文字上的地址
-    local list_text_homesign = {}
-    string.gsub(text_homesign, "[^ ]+", function(w)
-        table.insert(list_text_homesign, w)
-    end)
-    text_homesign = list_text_homesign[#list_text_homesign]
-    --请求网页
-    TheSim:QueryServer("https://pastebin.com/raw/"..text_homesign,
-    function(result, isSuccessful, resultCode)
-        if isSuccessful and resultCode == 200 then
-            --执行播放
-            JustPlay(inst, result)
-        else
-            inst.components.machine:TurnOff()
-        end
-    end, "GET")
+    JustPlay(inst, text_homesign)
 end
 
 local function TurnOff(inst)
